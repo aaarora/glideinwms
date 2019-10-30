@@ -17,8 +17,8 @@ EOF
 
 find_aux () {
     # $1 basename of the aux file
-    [ -e "$MYDIR/$1" ] && { echo "$MYDIR/$1"; return }
-    [ -e "$GLIDEINWMS_SRC/$1" ] && { echo "$GLIDEINWMS_SRC/$1"; return }
+    [ -e "$MYDIR/$1" ] && { echo "$MYDIR/$1"; return; }
+    [ -e "$GLIDEINWMS_SRC/$1" ] && { echo "$GLIDEINWMS_SRC/$1"; return; }
     false
 }
 
@@ -77,7 +77,7 @@ if [ "x$VIRTUAL_ENV" = "x" ]; then
 fi
 
 if ! cd "$GLIDEINWMS_SRC"/unittests ; then
-    echo "cannot find  '$GLIDEINWMS_SRC/unittests' , exiting" 
+    echo "cannot find  '$GLIDEINWMS_SRC/unittests' , exiting"
     exit 1
 fi
 
@@ -111,7 +111,7 @@ for file in $files_list ; do
         fi
     else
         if [ "$RUN_COVERAGE" = "yes" ]; then
-            coverage run   --source="${SOURCES}" --omit="test_*.py"  -a "$file" 
+            coverage run   --source="${SOURCES}" --omit="test_*.py"  -a "$file"
         else
             ./"$file"
         fi

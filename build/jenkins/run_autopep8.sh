@@ -10,8 +10,8 @@ usage () {
 
 find_aux () {
     # $1 basename of the aux file
-    [ -e "$MYDIR/$1" ] && { echo "$MYDIR/$1"; return }
-    [ -e "$GLIDEINWMS_SRC/$1" ] && { echo "$GLIDEINWMS_SRC/$1"; return }
+    [ -e "$MYDIR/$1" ] && { echo "$MYDIR/$1"; return; }
+    [ -e "$GLIDEINWMS_SRC/$1" ] && { echo "$GLIDEINWMS_SRC/$1"; return; }
     false
 }
 
@@ -21,8 +21,8 @@ process_branch() {
     scripts=`find glideinwms -path glideinwms/.git -prune -o -exec file {} \; -a -type f | grep -i python | grep -vi '\.py' | cut -d: -f1 | grep -v "\.html$" | sed -e 's/glideinwms\///g'`
     cd "${GLIDEINWMS_SRC}"
     for script in $scripts; do
-      echo autopep8 -a -i ${script} 
-      autopep8 -a -i ${script} 
+      echo autopep8 -a -i ${script}
+      autopep8 -a -i ${script}
     done
 
     files_checked=`echo $scripts`
@@ -31,12 +31,12 @@ process_branch() {
     shopt -s globstar
     for file in **/*.py
     do
-      echo autopep8 -a -i  $file 
-      autopep8 -a -i  $file 
+      echo autopep8 -a -i  $file
+      autopep8 -a -i  $file
       files_checked="$files_checked $file"
     done
 
-    echo "FILES_CHANGED=\"$files_checked\"" 
+    echo "FILES_CHANGED=\"$files_checked\""
     echo "FILES_CHANGED_COUNT=`echo $files_checked | wc -w | tr -d " "`"
 
 }
@@ -48,8 +48,8 @@ restore_branch() {
     scripts=`find glideinwms -path glideinwms/.git -prune -o -exec file {} \; -a -type f | grep -i python | grep -vi '\.py' | cut -d: -f1 | grep -v "\.html$" | sed -e 's/glideinwms\///g'`
     cd "${GLIDEINWMS_SRC}"
     for script in $scripts; do
-      echo git checkout ${script} 
-      git checkout ${script} 
+      echo git checkout ${script}
+      git checkout ${script}
     done
 
     files_checked=`echo $scripts`
@@ -58,13 +58,13 @@ restore_branch() {
     shopt -s globstar
     for file in **/*.py
     do
-      echo git checkout $file 
-      git checkout  $file 
+      echo git checkout $file
+      git checkout  $file
       files_checked="$files_checked $file"
     done
 
     echo "FILES_RESTORED=\"$files_checked\""
-    echo "FILES_RESTORED_COUNT=`echo $files_checked | wc -w | tr -d " "`" 
+    echo "FILES_RESTORED_COUNT=`echo $files_checked | wc -w | tr -d " "`"
 
 }
 

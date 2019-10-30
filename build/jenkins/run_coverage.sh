@@ -14,8 +14,8 @@ show_help(){
 
 find_aux () {
     # $1 basename of the aux file
-    [ -e "$MYDIR/$1" ] && { echo "$MYDIR/$1"; return }
-    [ -e "$GLIDEINWMS_SRC/$1" ] && { echo "$GLIDEINWMS_SRC/$1"; return }
+    [ -e "$MYDIR/$1" ] && { echo "$MYDIR/$1"; return; }
+    [ -e "$GLIDEINWMS_SRC/$1" ] && { echo "$GLIDEINWMS_SRC/$1"; return; }
     false
 }
 
@@ -27,7 +27,7 @@ do
     h) show_help;;
     b) shift; BRANCH=$1;;
     c) BRANCH='current';;
-    *) echo "illegal option: -$OPTARG"; show_help;;    
+    *) echo "illegal option: -$OPTARG"; show_help;;
     esac
     shift $((OPTIND-1))
 done
